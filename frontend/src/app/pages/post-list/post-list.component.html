@@ -1,0 +1,20 @@
+<div class="alert-success" *ngIf="message">{{ message }}</div>
+<div class="user-table">
+  <div class="add-user-btn-container">
+    <mat-label class="search-form-label">Keyword:</mat-label>
+    <mat-form-field appearance="outline" class="search-input">
+      <input type="text" matInput [(ngModel)]="keyword" name="username" #input>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" class="user-btn" (click)="searchUser()">Search</button>
+    <button mat-raised-button color="primary" class="user-btn" [routerLink]="['/post-create']">Create</button>
+    <button mat-raised-button color="primary" class="user-btn" (click)="uploadPost()">Upload</button>
+    <!-- <a mat-raised-button color="primary" class="download-user-btn" csvLink [data]="postData">Download</a> -->
+  </div>
+
+  <app-lists matSort></app-lists>
+
+  <mat-paginator #paginator [pageSizeOptions]="pageOptions" [pageSize]="pageSize" showFirstLastButtons
+  [length]="totalSize" [pageIndex]="currentPage">
+  </mat-paginator>
+</div>

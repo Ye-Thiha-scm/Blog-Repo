@@ -1,0 +1,31 @@
+<mat-card>
+  <mat-card-title>Welcome to Happy Cinema!</mat-card-title>
+  <button mat-raised-button color="primary" class="cinemas-btn" routerLink="/cinemas" *ngIf="isAdmin" (click)="onClickCinemas()">
+    <mat-icon class="mat-18">theaters</mat-icon>
+    Cinemas
+  </button>
+  <button mat-raised-button color="primary" class="users-btn" routerLink="/users" *ngIf="isAdmin" (click)="onClickUsers()">
+    <mat-icon class="mat-18">people_alt</mat-icon>
+    Users
+  </button>
+  <button mat-raised-button color="primary" class="movies-btn" routerLink="/movies" *ngIf="isAdmin" (click)="onClickMovies()">
+    <mat-icon class="mat-18">movie</mat-icon>
+    Movies
+  </button>
+  <button mat-raised-button color="primary" class="tickets-btn" routerLink="/tickets" (click)="onClickTickets()">
+    <mat-icon class="mat-18">local_activity</mat-icon>
+    Tickets
+  </button>
+  <button mat-raised-button color="primary" class="about-us-btn" routerLink="/about" (click)="onClickAboutUs()">
+    <mat-icon class="mat-18">info</mat-icon>
+    About Us
+  </button>
+  <button mat-raised-button color="primary" class="dashboard-btn" routerLink="/dashboard" (click)="onClickDashboard()">
+    <mat-icon class=""mat-18>dashboard</mat-icon>
+    Dashboard
+  </button>
+  <button mat-raised-button color="primary" class="profile-btn" routerLink="/profile" (click)="onClickProfile()">
+    <mat-icon class="mat-18">account_circle</mat-icon>
+    {{ loggedInUser.fullName }}
+  </button>
+</mat-card>

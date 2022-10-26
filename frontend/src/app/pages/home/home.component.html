@@ -1,0 +1,15 @@
+<mat-card>
+  <mat-card-title>Welcome to Blog List</mat-card-title>
+  <button mat-raised-button color="primary" class="users-btn" routerLink="/users" *ngIf="isAdmin" (click)="onClickUsers()">
+    <mat-icon class="mat-18">people_alt</mat-icon>
+    Users
+  </button>
+  <button mat-raised-button color="primary" class="about-us-btn" routerLink="/about" (click)="onClickAboutUs()">
+    <mat-icon class="mat-18">info</mat-icon>
+    Category
+  </button>
+  <button mat-raised-button color="primary" class="profile-btn" routerLink="/profile" (click)="onClickProfile()">
+    <mat-icon class="mat-18">account_circle</mat-icon>
+    {{ loggedInUser.fullName }}
+  </button>
+</mat-card>

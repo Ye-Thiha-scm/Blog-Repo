@@ -1,0 +1,18 @@
+table {
+  width: 100%;
+}
+
+clearfix::after{
+  clear: both;
+  content: '';
+  display: table;
+}
+
+mat-card {
+  height: 70px;
+  text-align: center;
+}
+
+.cinemas-btn, .movies-btn, .users-btn, .tickets-btn, .about-us-btn,.dashboard-btn {
+  margin-right: 30px;
+}

@@ -1,0 +1,38 @@
+.mat-card-content{
+  text-align: center;
+}
+
+mat-form-field, button {
+  margin-top: 16px;
+  margin-right: 16px;
+}
+
+mat-card-actions {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.profileimg {
+  object-fit: cover;
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 0;
+  height: 80%;
+  width: 80%;
+}
+
+.image {
+  float: left;
+  width: 300px;
+}
+
+.inputs {
+  float: right;
+  width: 500px;
+}
+
+.clearfix::after {
+  clear: both;
+  content: '';
+  display: table;
+}

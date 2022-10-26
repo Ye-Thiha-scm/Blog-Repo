@@ -1,0 +1,55 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Edit User</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form action="post" [formGroup]="formData" (ngSubmit)="onClickUpdateUser()">
+      <label>Profile</label>
+      <div *ngIf="confirmView==false" class="profileinput">
+        <input #file type="file" (change)="imageUpload($event)" formControlName="profile" accept="image/*"
+          maxFileSize=2000000>
+      </div>
+      <div *ngIf="profileImage">
+        <img [src]="profileImage" class="profileimg">
+      </div>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Name</mat-label>
+        <input type="text" matInput class="form-control" formControlName="fullName" required>
+        <mat-error *ngIf="myForm['fullName'].hasError('required')">Please enter your name!</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>User Type</mat-label>
+        <mat-select formControlName="type" [disabled]="isProfile == 'true'">
+          <mat-option *ngFor="let selectOption of typeOption" [value]="selectOption.enum">
+            {{ selectOption.enum }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Phone</mat-label>
+        <input type="text" matInput class="form-control" formControlName="phone" required>
+        <mat-error *ngIf="myForm['phone'].hasError('required')">Please enter your phone number!</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Email</mat-label>
+        <input type="text" matInput class="form-control" formControlName="email" required>
+        <mat-error *ngIf="myForm['email'].hasError('required')">Please enter your email!</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input (dateInput)="OnDateChange($event.value)" matInput [matDatepicker]="picker" [max]="today"
+          placeholder="Choose your Birthday" formControlName="dob">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Address</mat-label>
+        <input type="text" matInput class="form-control" formControlName="address">
+      </mat-form-field>
+      <div class="btn-div">
+        <button mat-raised-button type="button" color="warn" class="full-width" (click)="onClear()">{{ confirmView === true ? 'Cancel' : 'Clear' }}</button>
+        <button mat-raised-button color="primary" class="save-btn" [disabled]="formData.invalid"> {{ confirmView === true ? 'Confirm' : 'Register' }} </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+

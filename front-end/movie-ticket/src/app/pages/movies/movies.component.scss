@@ -1,0 +1,28 @@
+table {
+  width: 100%;
+  margin: 0 auto;
+}
+
+clearfix::after{
+  clear: both;
+  content: '';
+  display: table;
+}
+
+mat-card {
+  height: 30px;
+  text-align: center;
+}
+
+.create-movie-btn {
+  float: right;
+}
+
+.td-poster {
+  width: 100px;
+}
+
+.poster {
+  height: 50%;
+  width: 50%;
+}
