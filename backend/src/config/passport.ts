@@ -1,6 +1,6 @@
-import passport, { use } from "passport";
+const passport = require('passport');
 
-import passportJWT, { Strategy } from "passport-jwt";
+const passportJWT = require("passport-jwt");
 
 import  User from "../models/user.model";
 

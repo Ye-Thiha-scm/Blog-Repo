@@ -7,7 +7,6 @@ import crypto from 'crypto';
 import User from '../models/user.model';
 import PasswordReset from '../models/password.reset';
 import { sendEmail} from '../utils/sendEmail';
-const logger = require('../logger/logger');
 
 const loginService = async (req: Request, res: Response) => {
   User.findOne({ email: req.body.email }).then(async (user: any) => {
@@ -16,20 +15,18 @@ const loginService = async (req: Request, res: Response) => {
         success: false,
         message:'Could not find user'
       })
-      logger.error('Could not find user');
     }
     if (!compareSync(req.body.password, user.password)) {
       return res.status(401).send({
         success: false,
         message:'Incorrect Password'
       })
-      logger.error('Incorrect Password');
     }
     const payload = {
       email: await bcrypt.hash(user.email, 12),
       id:await bcrypt.hash(user.id,12)
     }
-    const token = jwt.sign(payload, 'secrect', { expiresIn: '1d' });
+    const token = jwt.sign(payload, 'secret', { expiresIn: '1d' });
 
     return res.status(200).send({
       success: true,
@@ -37,14 +34,12 @@ const loginService = async (req: Request, res: Response) => {
       users: user,
       token: token
     }); 
-    logger.info('Login Successfully!');
   })
 }
 
 const logoutService = async (req: any, res: Response) => {
   req.session = null;
   return res.json({ "message": "Logout Successfully" });
-  logger.info("Logged out successfully");
 };
 
 export const forgetPasswordService = async (req: any, res: Response) => {
@@ -66,10 +61,8 @@ export const forgetPasswordService = async (req: any, res: Response) => {
     res.status(200).json({
       message: "Password reset link sent to your email account"
     });
-    logger.info("Password reset link sent to your email account");
   } catch (error) {
     res.send("An error occured");
-    logger.error("An error occured");
   }
 };
 
@@ -90,10 +83,8 @@ export const checkResetPasswordService = async (req: any, res: Response) => {
     res.json({
       message: "Forget password sucessfully."
     });
-    logger.info("Forget password sucessfully.");
   } catch (error) {
     res.send("An error occured");
-    logger.error("An error occured");
   }
 };
 
@@ -114,10 +105,8 @@ export const resetPasswordService = async (req: Request, res: Response) => {
     res.json({
       message: "Password reset sucessfully."
     });
-    logger.info("Password reset sucessfully");
   } catch (error) {
     res.send("An error occured");
-    logger.error("An error occured");
   }
 }
 

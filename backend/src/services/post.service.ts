@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import Post from '../models/post'
 import { validationResult } from 'express-validator';
-const logger = require('../logger/logger');
 /**
  * get post service.
  * @param _req 
@@ -28,7 +27,6 @@ export const getPostService = async (
     res.json({ data: posts, status: 1 });
   } catch (err) {
     res.send("An error occured");
-    logger.postErrorLogger.log('error', 'Error Post Lists')
   }
 };
 
@@ -54,9 +52,6 @@ export const createPostService = async (req: Request, res: Response, _next: Next
       .json({ message: "Created Successfully!", data: result, status: 1 });
   } catch (err) {
     res.send("An error occured");
-    // Logger Usage
-    // logger.postLogger.log('warn', 'Error Create Post') 
-    logger.postInfoLogger.log('info', 'Error Create Post')
   }
 };
 
@@ -77,7 +72,6 @@ export const findPostService = async (
       res
         .status(404)
         .json({ message: "Post not found!", status: 0 });
-    logger.postErrorLogger.log('error', 'Post Not Found!')
   }
 }
 
@@ -111,7 +105,6 @@ export const updatePostService = async (
     res.json({ message: "Updated Successfully!", data: result, status: 1 });
   } catch (err) {
     res.send("An error occured");
-    logger.postErrorLogger.log('info', 'Error Update Post!')
   }
 };
 
@@ -132,7 +125,6 @@ export const deletePostService = async (
     res.json({ message: "Deleted Successfully!", status: 1 });
   } catch (err) {
     res.send("An error occured");
-    logger.postErrorLogger.log('error', 'Error Delete Post')
   }
 };
 
@@ -155,6 +147,5 @@ export const findByNameService = async (
     res.json({ data: posts, status: 1 });
   } catch (err) {
     res.send("An error occured");
-    logger.postErrorLogger.log('error', 'Error Search Post!')
   }
 }

@@ -3,12 +3,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const passport_1 = __importDefault(require("passport"));
-const passport_jwt_1 = __importDefault(require("passport-jwt"));
+const passport = require('passport');
+const passportJWT = require("passport-jwt");
 const user_model_1 = __importDefault(require("../models/user.model"));
-var JwtStrategy = passport_jwt_1.default.Strategy;
-var ExtractJwt = passport_jwt_1.default.ExtractJwt;
-passport_1.default.use(new JwtStrategy({
+var JwtStrategy = passportJWT.Strategy;
+var ExtractJwt = passportJWT.ExtractJwt;
+passport.use(new JwtStrategy({
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey: 'secret'
 }, function (jwtPayload, cb) {

@@ -1,34 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// import { createLogger, format, Logger, transports } from 'winston';
 const winston_1 = require("winston");
 var winston = require('winston');
 require('winston-daily-rotate-file');
-// import 'winston-daily-rotate-file';
-// export const logger = createLogger({
-//   transports: [
-//     new transports.DailyRotateFile({
-//       dirname:"logs",
-//       filename: "api-%DATE%.log",
-//       maxSize: '20m',
-//       maxFiles: '1d',
-//       format: format.combine(
-//         format.json()),
-//     }),
-//     new transports.Console({
-//       format: format.combine(
-//         format.colorize(),
-//         format.timestamp({format:'YYYY-MM-DD HH:mm:ss'}),
-//         format.printf(({ timestamp, level, message }) => {
-//           return `[${timestamp}] ${level}: ${message}`;
-//         })
-//       ),
-//     }),
-//   ],
-//   format: format.combine(
-//     format.metadata(),
-//     format.timestamp({format:'YYYY-MM-DD HH:mm:ss'})),
-// });
 var postErrLevel1 = new winston.transports.DailyRotateFile({
     datePattern: 'YYYY-MM-DD-HH-mm',
     filename: 'post-info-%DATE%.log',

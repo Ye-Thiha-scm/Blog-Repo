@@ -2,8 +2,8 @@ openapi: 3.0.2
 servers:
   - url: http://127.0.0.1:8081
 info:
-  description: This is API Doc for Angular+ NodeJS Movie Ticket 
-  title: Swagger API Doc for Movie Ticket
+  description: This is API Doc for Angular+ NodeJS Blog Project 
+  title: Swagger API Doc for Blog Project
   version: 1.0.0
 
 tags:

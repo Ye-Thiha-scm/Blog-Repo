@@ -21,7 +21,6 @@ const crypto_1 = __importDefault(require("crypto"));
 const user_model_1 = __importDefault(require("../models/user.model"));
 const password_reset_1 = __importDefault(require("../models/password.reset"));
 const sendEmail_1 = require("../utils/sendEmail");
-const logger = require('../logger/logger');
 const loginService = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     user_model_1.default.findOne({ email: req.body.email }).then((user) => __awaiter(void 0, void 0, void 0, function* () {
         if (!user) {
@@ -29,34 +28,30 @@ const loginService = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                 success: false,
                 message: 'Could not find user'
             });
-            logger.error('Could not find user');
         }
         if (!(0, bcrypt_1.compareSync)(req.body.password, user.password)) {
             return res.status(401).send({
                 success: false,
                 message: 'Incorrect Password'
             });
-            logger.error('Incorrect Password');
         }
         const payload = {
             email: yield bcrypt_2.default.hash(user.email, 12),
             id: yield bcrypt_2.default.hash(user.id, 12)
         };
-        const token = jsonwebtoken_1.default.sign(payload, 'secrect', { expiresIn: '1d' });
+        const token = jsonwebtoken_1.default.sign(payload, 'secret', { expiresIn: '1d' });
         return res.status(200).send({
             success: true,
             message: 'Login Successfully!',
             users: user,
             token: token
         });
-        logger.info('Login Successfully!');
     }));
 });
 exports.loginService = loginService;
 const logoutService = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     req.session = null;
     return res.json({ "message": "Logout Successfully" });
-    logger.info("Logged out successfully");
 });
 exports.logoutService = logoutService;
 const forgetPasswordService = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -76,11 +71,9 @@ const forgetPasswordService = (req, res) => __awaiter(void 0, void 0, void 0, fu
         res.status(200).json({
             message: "Password reset link sent to your email account"
         });
-        logger.info("Password reset link sent to your email account");
     }
     catch (error) {
         res.send("An error occured");
-        logger.error("An error occured");
     }
 });
 exports.forgetPasswordService = forgetPasswordService;
@@ -101,11 +94,9 @@ const checkResetPasswordService = (req, res) => __awaiter(void 0, void 0, void 0
         res.json({
             message: "Forget password sucessfully."
         });
-        logger.info("Forget password sucessfully.");
     }
     catch (error) {
         res.send("An error occured");
-        logger.error("An error occured");
     }
 });
 exports.checkResetPasswordService = checkResetPasswordService;
@@ -126,11 +117,9 @@ const resetPasswordService = (req, res) => __awaiter(void 0, void 0, void 0, fun
         res.json({
             message: "Password reset sucessfully."
         });
-        logger.info("Password reset sucessfully");
     }
     catch (error) {
         res.send("An error occured");
-        logger.error("An error occured");
     }
 });
 exports.resetPasswordService = resetPasswordService;

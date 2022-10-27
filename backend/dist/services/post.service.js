@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.findByNameService = exports.deletePostService = exports.updatePostService = exports.findPostService = exports.createPostService = exports.getPostService = void 0;
 const post_1 = __importDefault(require("../models/post"));
 const express_validator_1 = require("express-validator");
-const logger = require('../logger/logger');
 /**
  * get post service.
  * @param _req
@@ -38,7 +37,6 @@ const getPostService = (_req, res, _next) => __awaiter(void 0, void 0, void 0, f
     }
     catch (err) {
         res.send("An error occured");
-        logger.postErrorLogger.log('error', 'Error Post Lists');
     }
 });
 exports.getPostService = getPostService;
@@ -65,9 +63,6 @@ const createPostService = (req, res, _next) => __awaiter(void 0, void 0, void 0,
     }
     catch (err) {
         res.send("An error occured");
-        // Logger Usage
-        // logger.postLogger.log('warn', 'Error Create Post') 
-        logger.postInfoLogger.log('info', 'Error Create Post');
     }
 });
 exports.createPostService = createPostService;
@@ -85,7 +80,6 @@ const findPostService = (req, res, _next) => __awaiter(void 0, void 0, void 0, f
         res
             .status(404)
             .json({ message: "Post not found!", status: 0 });
-        logger.postErrorLogger.log('error', 'Post Not Found!');
     }
 });
 exports.findPostService = findPostService;
@@ -116,7 +110,6 @@ const updatePostService = (req, res, _next) => __awaiter(void 0, void 0, void 0,
     }
     catch (err) {
         res.send("An error occured");
-        logger.postErrorLogger.log('info', 'Error Update Post!');
     }
 });
 exports.updatePostService = updatePostService;
@@ -134,7 +127,6 @@ const deletePostService = (req, res, _next) => __awaiter(void 0, void 0, void 0,
     }
     catch (err) {
         res.send("An error occured");
-        logger.postErrorLogger.log('error', 'Error Delete Post');
     }
 });
 exports.deletePostService = deletePostService;
@@ -153,7 +145,6 @@ const findByNameService = (req, res, _next) => __awaiter(void 0, void 0, void 0,
     }
     catch (err) {
         res.send("An error occured");
-        logger.postErrorLogger.log('error', 'Error Search Post!');
     }
 });
 exports.findByNameService = findByNameService;

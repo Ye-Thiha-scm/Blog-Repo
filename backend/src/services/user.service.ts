@@ -4,8 +4,6 @@ import bcrypt from 'bcrypt';
 import { deleteFile } from "../utils/utils";
 import { UserCreate } from '../interfaces/user';
 import User from '../models/user.model';
-import { constData } from '../const/const';
-const logger = require('../logger/logger');
 
 export const getUserService = async (
   req: Request,
@@ -38,10 +36,8 @@ export const getUserService = async (
         self: req.originalUrl,
       }
     });
-    logger.info("Successfully retrieved User data");
   } catch (err) {
     next(err);
-    logger.error("Error retrieving User data");
   }
 };
 
@@ -57,7 +53,6 @@ export const createUserService = async (
       error.data = errors.array();
       error.statusCode = 401;
       throw error;
-      logger.error("Validation failed!");
     }
     let profile: string = req.body.profile;
     if (req.files?.profile?.length > 0) {
@@ -79,10 +74,8 @@ export const createUserService = async (
     res
       .status(201)
       .json({ message: "Created User Successfully!", data: result, status: 1 });
-    logger.info("Created User Successfully!");
   } catch (err) {
     next(err);
-    logger.error("Validation failed!");
   }
 };
 
@@ -97,13 +90,10 @@ export const findUserService = async (
       const error: any = Error("Not Found!");
       error.statusCode = 401;
       throw error;
-      logger.error("Not Found!");
     }
     res.json({ data: user, status: 1 });
-    logger.info("User Data Information");
   } catch (err) {
     next(err);
-    logger.error("Not Found!");
   }
 }
 
@@ -119,15 +109,12 @@ export const updateUserService = async (
       error.data = errors.array();
       error.statusCode = 422;
 
-      logger.error("Validation failed");
       throw error;
     }
     const user: any = await User.findByIdAndUpdate(req.params.id);
     if (!user) {
       const error: any = new Error("Not Found!");
       error.statusCode = 401;
-
-      logger.error("Not Found!");
       throw error;
     }
     let profile: string = req.body.profile;
@@ -150,10 +137,8 @@ export const updateUserService = async (
     user.updated_user_id = req.body.updated_user_id;
     const result = await user.save();
     res.json({ message: "Updated User Successfully!", data: result, status: 1 });
-    logger.info("Updated User Successfully!");
   } catch (err) {
     next(err);
-    logger.error("Error updating user");
   }
 };
 
@@ -167,14 +152,11 @@ export const deleteUserService = async (
     if (!user) {
       const error: any = new Error("Not Found!");
       error.statusCode = 401;
-      logger.error("Not Found!");
       throw error;
     }
     res.json({ message: "Delete User Successfully!", data: user, status: 1 });
-    logger.info("User deleted successfully!");
   } catch (err) {
     next(err);
-    logger.error("Error deleting user!");
   }
 }
 
@@ -187,13 +169,11 @@ export const passwordChangeService = async (req: Request, res: Response, next: N
     //Check required fields
     if (!oldPassword || !newPassword || !confirmPassword) {
       res.json({ message: "Please fill in all fields." });
-      logger.error("Please fill in all fields.");
     }
     
     //Check passwords match
     if (newPassword !== confirmPassword) {
       res.json({ message: "New password do not match." });
-      logger.error("New password do not match.");
     } else {
       //Validation Passed
       const isMatch = await bcrypt.compare(oldPassword, user.password);
@@ -210,14 +190,11 @@ export const passwordChangeService = async (req: Request, res: Response, next: N
             })
           );
           res.json({ message: "Password Successfully Updated!", data: user, status: 1 });
-          logger.info("Password Successfully Updated!");
         } else {
           res.json({ message: "Current Password is not match." })
-          logger.error("Current Password is not match.");
         }
     }
   } catch (err) {
     res.json({ message: "Password does not match" });
-    logger.error("Password does not match!");
   }
 }
